@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "edu.ucla.cs.ndnwhiteboard"
         minSdkVersion 15
-        targetSdkVersion 21
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
@@ -21,11 +21,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'net.named-data:jndn:0.5'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'net.named-data:jndn-android:0.9'
     compile 'net.named-data.jndn-xx:jndn-xx-util:0.0.1'
-//
-//    compile 'com.intel.jndn.utils:jndn-utils:0.9.7'
-//    compile 'com.intel.jndn.management:jndn-management:0.9.7'
-//    compile 'joda-time:joda-time:2.7'
 }
