@@ -17,11 +17,9 @@ You can find the recorded demos in GIF format at [Demo Gifs](/DemoGIFs).
 ![Screenshots](/images/Screenshots.png)
 
 ###Prerequisites
-Before this application can be used, the NFD-Android (Networking Forwarding Daemon) has to be
-installed and running on the phone.
 
-Instructions on compiling and installing NFD-Android can be found at:
-[NFD-Android](https://github.com/named-data/NFD-android).
+Before this application can be used, the [NFD-Android (Networking Forwarding Daemon)](http://play.google.com/store/apps/details?id=net.named_data.nfd) has to be
+installed and running on the phone.
 
 ###Images of set-up process
 ![Screenshots](/images/Instructions.png)

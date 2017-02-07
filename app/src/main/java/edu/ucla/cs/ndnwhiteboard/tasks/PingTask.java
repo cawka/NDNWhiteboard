@@ -41,7 +41,7 @@ public class PingTask extends AsyncTask<Void, Void, String> {
             ndnActivity.m_face = new Face("localhost");
 
             // Express the ping Interest
-            ndnActivity.m_face.expressInterest(new Name("/ndn/edu/ucla/remap/ping"),
+            ndnActivity.m_face.expressInterest(new Name("/localhost/nfd/status/general"),
                     new OnData() {
                         @Override
                         public void
