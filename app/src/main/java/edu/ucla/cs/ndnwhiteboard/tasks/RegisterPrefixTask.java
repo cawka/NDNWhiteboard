@@ -14,7 +14,6 @@ import net.named_data.jndn.OnInterestCallback;
 import net.named_data.jndn.OnRegisterFailed;
 import net.named_data.jndn.security.KeyChain;
 import net.named_data.jndn.security.SecurityException;
-import net.named_data.jndn.util.Blob;
 
 import java.io.IOException;
 
@@ -71,17 +70,9 @@ public class RegisterPrefixTask extends AsyncTask<Void, Void, String> {
                                        long interestFilterId,
                                        InterestFilter filter) {
                     Name interestName = interest.getName();
-                    String lastComp = interestName.get(interestName.size() - 1).toEscapedString();
-                    Log.i("NDN", "Interest received: " + lastComp);
-                    int comp = Integer.parseInt(lastComp) - 1;
-
-                    Data data = new Data();
-                    data.setName(new Name(interestName));
-                    Blob blob;
-                    if (ndnActivity.dataHistory.size() > comp) {
-                        blob = new Blob(ndnActivity.dataHistory.get(comp).getBytes());
-                        data.setContent(blob);
-                    } else {
+                    Log.i("NDN", "Interest received: " + interestName.toUri());
+                    Data data = ndnActivity.dataHistory.get(interestName);
+                    if (data == null) {
                         return;
                     }
                     try {

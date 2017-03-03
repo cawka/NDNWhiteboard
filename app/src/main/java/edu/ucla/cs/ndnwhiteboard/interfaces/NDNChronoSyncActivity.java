@@ -5,7 +5,6 @@ import android.util.Log;
 import net.named_data.jndn.sync.ChronoSync2013;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +16,7 @@ import edu.ucla.cs.ndnwhiteboard.tasks.PingTask;
 public abstract class NDNChronoSyncActivity extends NDNActivity {
     public ChronoSync2013 sync;
     public String username;
+    public int seqNo = 1;
 
     // Keeping track of what seq #'s are requested from each user
     public Map<String, Long> highestRequested;
@@ -31,7 +31,7 @@ public abstract class NDNChronoSyncActivity extends NDNActivity {
     public void initialize() {
         // Start Ping sequence
         activity_stop = false;
-        dataHistory = new ArrayList<>();  // History of packets generated
+        dataHistory = new HashMap<>();  // History of packets generated
         // Keeping track of what seq #'s are requested from each user
         highestRequested = new HashMap<>();
         new PingTask(this).execute();
@@ -47,7 +47,7 @@ public abstract class NDNChronoSyncActivity extends NDNActivity {
             public void run() {
                 try {
                     if (sync != null) {
-                        while (sync.getSequenceNo() < dataHistory.size()
+                        while (sync.getSequenceNo() < seqNo - 1
                                 && sync.getSequenceNo() != -1) {
                             Log.d(TAG, "Seq is now: " + sync.getSequenceNo());
                             sync.publishNextSequenceNo();

@@ -5,9 +5,11 @@ import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
+import net.named_data.jndn.Data;
 import net.named_data.jndn.Face;
+import net.named_data.jndn.Name;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Interface for Activity tht uses NDN
@@ -23,9 +25,9 @@ public abstract class NDNActivity extends ActionBarActivity {
 
     public String applicationNamePrefix;
 
-    public ArrayList<String> dataHistory;
+    public Map<Name, Data> dataHistory;
 
-    public abstract void handleDataReceived(String data);
+    public abstract void handleDataReceived(Data data);
 
     // Set the boolean flag that stops all long running loops
     public void stop() {

@@ -18,6 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import net.named_data.jndn.Data;
+import net.named_data.jndn.Name;
+import net.named_data.jndn.util.Blob;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -266,7 +270,13 @@ public class WhiteboardActivity extends NDNChronoSyncActivity { // ActionBarActi
      * @param jsonData the json representation of the user's action
      */
     public void callback(String jsonData) {
-        dataHistory.add(jsonData);  // Add action to history
+        Name dataName = new Name(applicationNamePrefix).append(new Integer(seqNo).toString());
+        seqNo ++;
+        Data data = new Data();
+        data.setName(new Name(dataName));
+        Blob blob = new Blob(jsonData.getBytes());
+        data.setContent(blob);
+        dataHistory.put(dataName, data);  // Add action to history
         increaseSequenceNos();
         Log.d(TAG, "Stroke generated: " + jsonData);
     }
@@ -336,7 +346,8 @@ public class WhiteboardActivity extends NDNChronoSyncActivity { // ActionBarActi
     }
 
     @Override
-    public void handleDataReceived(String data) {
-        drawingView_canvas.callback(data);
+    public void handleDataReceived(Data data) {
+        dataHistory.put(data.getName(), data);
+        drawingView_canvas.callback(data.getContent().toString());
     }
 }

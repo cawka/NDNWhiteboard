@@ -30,7 +30,7 @@ public class FetchChangesTask extends AsyncTask<Void, Void, Void> {
         this.namePrefixStr = namePrefixStr;
     }
 
-    String m_retVal;
+    Data m_retData;
 
     @Override
     protected Void doInBackground(Void... params) {
@@ -41,15 +41,13 @@ public class FetchChangesTask extends AsyncTask<Void, Void, Void> {
             ndnActivity.m_face.expressInterest(new Name(nameStr), new OnData() {
                 @Override
                 public void
-                onData(Interest interest, Data data) {
-                    // Success, send data to be drawn by the Drawing view
-                    m_retVal = data.getContent().toString();
+                onData(Interest interest, final Data data) {
                     m_shouldStop = true;
-                    Log.d(TAG, "Got content: " + m_retVal);
+                    Log.d(TAG, "Got data: " + data.toString());
                     ndnActivity.getHandler().post(new Runnable() {
                         @Override
                         public void run() {
-                            ndnActivity.handleDataReceived(m_retVal);
+                            ndnActivity.handleDataReceived(data);
                         }
                     });
 
@@ -58,7 +56,6 @@ public class FetchChangesTask extends AsyncTask<Void, Void, Void> {
                 @Override
                 public void onTimeout(Interest interest) {
                     // Failure, try again
-                    m_retVal = null;
                     m_shouldStop = true;
                     Log.d(TAG, "Got Timeout " + namePrefixStr);
                     if (!ndnActivity.activity_stop) {
