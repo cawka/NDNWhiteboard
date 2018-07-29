@@ -3,7 +3,7 @@ package edu.ucla.cs.ndnwhiteboard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,7 @@ import edu.ucla.cs.ndnwhiteboard.helpers.Utils;
  * The activity displays the generated username and whiteboard name along with the prefix to be
  * used by the application.
  */
-public class IntroActivity extends ActionBarActivity {
+public class IntroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,7 +2,7 @@ package edu.ucla.cs.ndnwhiteboard.interfaces;
 
 import android.app.ProgressDialog;
 import android.os.Handler;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import net.named_data.jndn.Data;
@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Interface for Activity tht uses NDN
  */
-public abstract class NDNActivity extends ActionBarActivity {
+public abstract class NDNActivity extends AppCompatActivity {
     public Face m_face;
 
     public abstract Handler getHandler();
